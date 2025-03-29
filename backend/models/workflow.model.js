@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose'
 
 const WorkflowSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -27,4 +27,6 @@ const WorkflowSchema = new mongoose.Schema({
   ]
 });
 
-module.exports = mongoose.model("Workflow", WorkflowSchema);
+const Workflow= mongoose.model("Workflow", WorkflowSchema);
+
+export default Workflow

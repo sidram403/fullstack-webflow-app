@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken'
 
-module.exports = (req, res, next) => {
+export  const authMiddleware = (req, res, next) => {
   const authHeader = req.header("Authorization");
 
   // Check if token is provided and starts with "Bearer"

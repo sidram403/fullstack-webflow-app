@@ -1,14 +1,7 @@
-const express = require("express");
-const {
-    createWorkflow,
-    updateWorkflow,
-    deleteWorkflow,
-    getAllWorkflows,
-    getWorkflowById,
-    updateWorkflowWithStatus
-} = require("../controllers/workflow.controller.js");
+import express from 'express'
+import { authMiddleware } from '../middleware/authMiddleware.js';
+import { createWorkflow, deleteWorkflow, getAllWorkflows, getWorkflowById, updateWorkflow, updateWorkflowWithStatus } from '../controllers/workflow.controller.js';
 
-const authMiddleware = require("../middleware/authMiddleware.js");
 
 const router = express.Router();
 
@@ -20,4 +13,4 @@ router.delete("/:id", authMiddleware, deleteWorkflow);
 router.get("/all", getAllWorkflows);
 router.get("/:id", getWorkflowById);
 
-module.exports = router;
+export default router;

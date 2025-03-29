@@ -1,8 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user.model.js");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const User = require("../models/user.model.js");
+import User from '../models/user.model.js'
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-exports.register = async (req, res) => {
+
+export const register = async (req, res) => {
   const { email, password, username } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = new User({ email, password: hashedPassword, username });
@@ -10,7 +14,7 @@ exports.register = async (req, res) => {
   res.json({ success:true, message: "User registered successfully" });
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user || !(await bcrypt.compare(password, user.password))) {

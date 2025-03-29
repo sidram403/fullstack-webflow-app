@@ -1,8 +1,11 @@
-const Workflow = require("../models/workflow.model.js");
-const moment = require("moment")
+// const Workflow = require("../models/workflow.model.js");
+// const moment = require("moment")
+
+import Workflow from '../models/workflow.model.js'
+import moment from 'moment'
 
 // Create Workflow
-exports.createWorkflow = async (req, res) => {
+export const createWorkflow = async (req, res) => {
   try {
     const { title, name, workflow, status, description } = req.body;
     const editor = req.user?.user || "Unknown Editor";
@@ -23,7 +26,7 @@ exports.createWorkflow = async (req, res) => {
 };
 
 // Get all workflows
-exports.getAllWorkflows = async (req, res) => {
+export const getAllWorkflows = async (req, res) => {
   try {
     const workflows = await Workflow.find({});
     res.status(200).json({ success: true, data: workflows });
@@ -33,7 +36,7 @@ exports.getAllWorkflows = async (req, res) => {
 };
 
 // Get workflow by ID
-exports.getWorkflowById = async (req, res) => {
+export const getWorkflowById = async (req, res) => {
   try {
     const workflow = await Workflow.findById(req.params.id);
     if (!workflow)
@@ -48,7 +51,7 @@ exports.getWorkflowById = async (req, res) => {
 };
 
 // Update a workflow
-exports.updateWorkflow = async (req, res) => {
+export const updateWorkflow = async (req, res) => {
   try {
     const workflow = await Workflow.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -64,7 +67,7 @@ exports.updateWorkflow = async (req, res) => {
   }
 };
 
-exports.updateWorkflowWithStatus = async (req, res) => {
+export const updateWorkflowWithStatus = async (req, res) => {
   const id = req.params.id;
   const { status, details } = req.body;
   const _id = id;
@@ -96,7 +99,7 @@ exports.updateWorkflowWithStatus = async (req, res) => {
 };
 
 // Delete a workflow
-exports.deleteWorkflow = async (req, res) => {
+export const deleteWorkflow = async (req, res) => {
   try {
     const workflow = await Workflow.findByIdAndDelete(req.params.id);
     if (!workflow)
